@@ -81,4 +81,21 @@ async function handleSendMessage() {
       }
     }
 
- 
+    messageHistory.push({ role: "assistant", content: assistantReply });
+
+  } catch (error) {
+    console.error("Error:", error);
+    botMessageDiv.textContent = "Maaf, terjadi kesalahan pada server.";
+  } finally {
+    userInput.disabled = false;
+    sendButton.disabled = false;
+    userInput.focus();
+  }
+}
+
+sendButton.addEventListener("click", handleSendMessage);
+userInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    handleSendMessage();
+  }
+});
